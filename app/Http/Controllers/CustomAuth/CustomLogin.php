@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\CustomAuth;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -28,22 +29,19 @@ class CustomLogin extends Controller
      */
     public function authenticate(Request $request)
     {
-
-        $user = Auth::user();
-        
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
-        if ($user && $user->hasVerifiedEmail()) {
-
-            return back()->withErrors([
-                'email' => 'Please verify your email address before logging in.'
-            ]);
-
+    
+        $user = User::where('email', $credentials['email'])->first();
+    
+        if ($user) {
+            if (!$user->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
         }
-
+    
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             

@@ -10,7 +10,9 @@ use App\Http\Controllers\CustomAuth\PasswordResetController;
 use App\Http\Controllers\LikeDislikeController;
 use App\Http\Controllers\WatchStreamVedioController;    
 
-
+Route::get('/createpost', function () {
+    return view('createpost');
+})->middleware(['auth', 'verified']);
 Route::get('/', function () {
     return view('home');
 })->middleware(['auth', 'verified']);

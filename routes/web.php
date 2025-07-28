@@ -9,11 +9,13 @@ use App\Http\Controllers\CustomAuth\CustomRegister;
 use App\Http\Controllers\CustomAuth\PasswordResetController;
 use App\Http\Controllers\LikeDislikeController;
 use App\Http\Controllers\WatchStreamVedioController;    
+use App\Http\Controllers\Dasboard\DashboardController;
+use App\Http\Controllers\Dasboard\VideoPostController;   
+use App\Http\Controllers\MainViewController;
+use App\Http\Controllers\Dasboard\AllvedioController;
 
 
-Route::get('/', function () {
-    return view('home');
-})->middleware(['auth', 'verified']);
+Route::get('/', [MainViewController::class, 'index'])->middleware(['auth', 'verified']);
 Route::get('/test', function () {
     return view('CustomAuth.reset-password');
 });
@@ -50,7 +52,8 @@ Route::post('/register', [CustomRegister::class, 'store']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 Route::get('/dashboard/vediopost', [VideoPostController::class, 'index'])->name('vediopost')->middleware('auth');
 Route::post('/dashboard/vediopost', [VideoPostController::class, 'createapost'])->name('vediopost.create')->middleware('auth');
-
+Route::get('/dashboard/userallvideos', [AllvedioController::class, 'index'])->name('userallvideos')->middleware('auth');
+Route::get('/dashboard/editvediopost/{id}', [AllvedioController::class, 'editvediopost'])->name('editvediopost')->middleware('auth');
 
 Route::any('/logout', function () {
     Auth::logout();

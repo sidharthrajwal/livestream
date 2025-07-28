@@ -25,50 +25,15 @@
             </div>
         </header>
 
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white p-6 rounded-lg shadow">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-red-100 text-primary">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <div class="ml-4">
-                        <p class="text-gray-500">Total Videos</p>
-                        <h3 class="text-2xl font-bold">24</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-blue-100 text-blue-500">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <div class="ml-4">
-                        <p class="text-gray-500">Total Views</p>
-                        <h3 class="text-2xl font-bold">1,234</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-green-100 text-green-500">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="ml-4">
-                        <p class="text-gray-500">Subscribers</p>
-                        <h3 class="text-2xl font-bold">456</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
+   
 
         <!-- Recent Videos -->
         <div class="bg-white rounded-lg shadow p-6">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-semibold">Recent Videos</h2>
-                <button class="px-4 py-2 bg-primary text-white rounded-md hover:bg-red-700">
+                <a href="{{ route('vediopost') }}" class="px-4 py-2 bg-primary text-white rounded-md hover:bg-red-700">
                     <i class="fas fa-plus mr-2"></i>New Video
-                </button>
+                </a>
             </div>
             
             <div class="overflow-x-auto">
@@ -83,12 +48,13 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach($videos as $video)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-10 w-16 bg-gray-200 rounded"></div>
+           `                         <div class="flex-shrink-0 h-10 w-16 bg-gray-200 rounded"><img src="{{ asset('storage/vediopostthumails/' . $video->post_thumbnail) }}"></div>
                                     <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">My Awesome Video</div>
+                                        <div class="text-sm font-medium text-gray-900">{{$video->post_title}}</div>
                                         <div class="text-sm text-gray-500">3 days ago</div>
                                     </div>
                                 </div>
@@ -104,11 +70,13 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 Jul 25, 2023
                             </td>
+                      
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <a href="{{ route('vediopost') }}" class="text-primary hover:text-red-700 mr-4">Edit</a>
+                                <a href="{{ url('dashboard/editvediopost/' . $video->id) }}" class="text-primary hover:text-red-700 mr-4">Edit</a>
                                 <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
                             </td>
                         </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -127,7 +95,7 @@
         margin-left: 16rem;
     }
 </style>
-
 @endsection
+
 
 

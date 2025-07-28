@@ -6,21 +6,27 @@
     <!-- Hero Section -->
     <div class="relative h-96 overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-dark to-transparent z-10"></div>
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+        @if(isset($posts[0]) && !empty($posts[0]))
+            <div class="absolute inset-0 bg-cover bg-center" 
+                 style="background-image: url('{{ asset('storage/vediopostthumails/' . $posts[0]->post_thumbnail) }}')">
+            </div>
+        @endif
+
         <div class="container mx-auto px-4 h-full flex items-center relative z-20">
+            @if(isset($posts[0]) && !empty($posts[0]))
             <div class="max-w-2xl">
-                <span class="text-primary font-semibold text-sm uppercase tracking-wider">Featured Today</span>
-                <h1 class="text-5xl font-bold text-white mt-2">The Best of 2023</h1>
-                <p class="text-gray-200 mt-4 text-lg">Discover the most watched and loved content of the year, all in one place.</p>
+                <h1 class="text-5xl font-bold text-white mt-2">{{ $posts[0]->post_title ?? 'Welcome to Our Platform' }}</h1>
+                <p class="text-gray-200 mt-4 text-lg">{{ $posts[0]->post_description ?? 'Discover amazing content' }}</p>
                 <div class="mt-6 flex space-x-4">
-                    <a href="{{ url('watch') }}" class="bg-primary hover:bg-secondary text-white px-8 py-3 rounded-full font-medium transition-colors">
+                    <a href="{{ url('watch/'.$posts[0]->id) }}" class="bg-primary hover:bg-secondary text-white px-8 py-3 rounded-full font-medium transition-colors">
                         <i class="fas fa-play mr-2"></i> Watch Now
-    </a>
-                    <butt`on class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-medium backdrop-blur-sm transition-colors">
+                    </a>
+                    <button class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-full font-medium backdrop-blur-sm transition-colors">
                         <i class="far fa-bookmark mr-2"></i> Save for Later
                     </button>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 

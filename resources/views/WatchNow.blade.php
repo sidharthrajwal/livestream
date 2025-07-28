@@ -3,6 +3,7 @@
 @section('title', 'Home Page')
 
 @section('content')
+
     <!-- Main Content -->
     <div class="pt-16">
         <div class="container mx-auto px-4 py-6">
@@ -13,11 +14,13 @@
                     <div class="bg-black rounded-xl overflow-hidden shadow-2xl mb-6">
                         <div class="video-container">
                             <!-- Replace with your video embed code or custom player -->
-                            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                                    title="Video Player" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen></iframe>
-                        </div>
+            
+                            <video controls width="100%" height="auto" autoplay>
+    <source src="{{ asset('storage/vedioposts/' . $videopost->post_file_title) }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+</div>
+
                         
                         <!-- Video Controls -->
                         <div class="p-4 backdrop-blur-sm">
@@ -48,7 +51,7 @@
 
                     <!-- Video Info -->
                     <div class="backdrop-blur-sm rounded-xl p-6 mb-6">
-                        <h1 class="text-2xl font-bold mb-2">Amazing Video Title That Could Be Quite Long and Take Multiple Lines</h1>
+                        <h1 class="text-2xl font-bold mb-2">{{$videopost->post_description}}</h1>
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center space-x-2 text-sm text-gray-400">
                                 <span>1.2M views</span>

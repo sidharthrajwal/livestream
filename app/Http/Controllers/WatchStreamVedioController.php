@@ -17,7 +17,9 @@ class WatchStreamVedioController extends Controller
         $video = PostLikeDislikeModel::where('post_id', $post_id)->count();
         $posts = PostLikeDislikeModel::where('user_id', $UserId)->where('post_id', $post_id)->count();
         
+        $videopost  = VedioPosts::where('id', $post_id)->first();
+
    $likes = $video;
-   return view('WatchNow', compact('likes', 'post_id', 'posts'));
+   return view('WatchNow', compact('likes', 'post_id', 'posts','videopost'));
     }
 }

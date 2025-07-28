@@ -73,7 +73,7 @@
             </div>
             
             <div class="hidden md:flex space-x-6">
-                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="/" class="text-white hover:text-primary transition-colors"><i class="fas fa-home mr-2"></i>Home</a>
                 <a href="#" class="text-gray-300 hover:text-primary transition-colors"><i class="fas fa-compass mr-2"></i>Discover</a>
                 <a href="#" class="text-gray-300 hover:text-primary transition-colors"><i class="fas fa-film mr-2"></i>Shows</a>
                 <a href="#" class="text-gray-300 hover:text-primary transition-colors"><i class="fas fa-tag mr-2"></i>Deals</a>
@@ -89,7 +89,7 @@
                 @else
                 <div class="flex items-center space-x-4">
                     <a href="#" class="text-white hover:text-primary"><i class="far fa-bell text-xl"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center text-white">
+                    <a href="/dashboard" class="w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center text-white">
                         <i class="fas fa-user"></i>
                     </a>
                     <a href="{{ url('logout') }}" class="hidden md:block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full font-medium transition-colors">Logout</a>

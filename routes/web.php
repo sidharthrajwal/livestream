@@ -10,9 +10,7 @@ use App\Http\Controllers\CustomAuth\PasswordResetController;
 use App\Http\Controllers\LikeDislikeController;
 use App\Http\Controllers\WatchStreamVedioController;    
 
-Route::get('/createpost', function () {
-    return view('createpost');
-})->middleware(['auth', 'verified']);
+
 Route::get('/', function () {
     return view('home');
 })->middleware(['auth', 'verified']);
@@ -48,6 +46,11 @@ Route::post('/login', [CustomLogin::class, 'authenticate']);
 
 Route::get('/register', [CustomRegister::class, 'index'])->name('register');
 Route::post('/register', [CustomRegister::class, 'store']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/vediopost', [VideoPostController::class, 'index'])->name('vediopost')->middleware('auth');
+Route::post('/dashboard/vediopost', [VideoPostController::class, 'createapost'])->name('vediopost.create')->middleware('auth');
+
 
 Route::any('/logout', function () {
     Auth::logout();
